@@ -10,6 +10,8 @@
     "history": "^2.0.1",
     "hoist-non-react-statics": "^1.0.5",
     "koa": "^2.0.0",
+    "koa-stream": "^2.0.0",
+    "react-dom-stream": "^0.5.1",
     "print-error": "^0.1.3",
     "query-string": "^4.2.3",
     "react-helmet": "^3.1.0",

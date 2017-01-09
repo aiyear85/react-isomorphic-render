@@ -4,6 +4,7 @@ import render_page from './render'
 import { get_preferred_locales } from './locale'
 import render_stack_trace from './html stack trace'
 import { normalize_common_options } from '../redux/normalize'
+import { stream } from 'koa-stream'
 
 import timer from '../timer'
 
@@ -107,8 +108,9 @@ export default function start_webpage_rendering_server(options, common)
 	}
 
 	// Isomorphic rendering
-	web.use(async (ctx) =>
+	web.use(function *()
 	{
+    ctx = this
 		// Trims a question mark in the end (just in case)
 		const url = ctx.request.originalUrl.replace(/\?$/, '')
 
@@ -119,7 +121,7 @@ export default function start_webpage_rendering_server(options, common)
 
 		try
 		{
-			const { status, content, redirect, route, time } = await render_page
+			const { status, content, redirect, route, time } = render_page
 			({
 				application,
 				assets,
@@ -150,6 +152,7 @@ export default function start_webpage_rendering_server(options, common)
 			}
 
 			ctx.body = content
+      yield content
 
 			if (stats)
 			{
