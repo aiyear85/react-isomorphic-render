@@ -7,5 +7,8 @@ import ReactDOMServer from 'react-dom/server'
 //
 export default function render_on_server({ render_webpage_as_react_element, page_element })
 {
-	return '<!doctype html>\n' + ReactDOMServer.renderToString(render_webpage_as_react_element(page_element))
+  let d = new Date(); console.log("Render start: ", d.getSeconds(), d.getMilliseconds());
+  let ret = '<!doctype html>\n' + ReactDOMServer.renderToString(render_webpage_as_react_element(page_element))
+  let d2 = new Date(); console.log("Render end: ", d2.getSeconds(), d2.getMilliseconds());
+	return 
 }
